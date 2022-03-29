@@ -4,6 +4,7 @@ const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
+const { protect } = require("../middleware/authMiddleware");
 
 const User = require("../model/userModel");
 
@@ -83,6 +84,22 @@ router.post(
         message: "Invalid Credentials",
       });
     }
+  })
+);
+
+// @desc    Get current user
+// @route   /api/users/me
+// @access  Private
+router.get(
+  "/me",
+  protect,
+  asyncHandler(async (req, res) => {
+    const user = {
+      id: req.user._id,
+      name: req.user.name,
+      email: req.user.email,
+    };
+    res.status(200).json({ message: user });
   })
 );
 
