@@ -15,6 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Defining Routes
 const userRoutes = require("./routes/userRoutes");
+const ticketRoutes = require("./routes/ticketRoutes");
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Welcome to Support-Desk API" });
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
 
 // Routes
 app.use("/api/users", userRoutes);
+app.use("/api/tickets", ticketRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server started on Port :${PORT}`);
