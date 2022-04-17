@@ -36,7 +36,7 @@ const getTicket = asyncHandler(async (req, res) => {
     res.status(401).json({ message: "Not Authorized" });
   }
 
-  res.status(200).json({ message: ticket });
+  res.status(200).json(ticket);
 });
 
 // @desc    Delete ticket
